@@ -1,6 +1,6 @@
 # dual_capture
 
-A Flutter package for dual camera capture. Sequentially captures the back then front camera, composites them into a single JPEG with a configurable picture-in-picture overlay, and returns a `DualCaptureResult` containing the composited file plus both raw files.
+Capture back and front camera in one tap. The two shots are composited into a single JPEG with a picture-in-picture overlay — you get the composited image plus both raw files.
 
 ## Features
 
@@ -122,8 +122,8 @@ class _MyState extends State<MyPage> {
 | `DualCaptureController.state` | Current `DualCaptureState` |
 | `DualCapturePreview` | `Widget` that shows the live camera feed |
 | `DualCaptureScreen` | Full-screen camera UI (used internally by `DualCapture.capture`) |
-| `DualCaptureOptions` | Immutable options bag |
-| `DualCaptureResult` | Immutable result bag with three `File` references |
+| `DualCaptureOptions` | All capture settings in one object |
+| `DualCaptureResult` | Holds the three output files + timestamp |
 | `OverlayPosition` | Enum: `bottomRight`, `bottomLeft`, `topRight`, `topLeft` |
 | `OverlayBorder` | Optional border around the PiP overlay |
 | `DualCaptureException` | Thrown when the pipeline encounters an error |
@@ -148,7 +148,6 @@ class _MyState extends State<MyPage> {
 └─────────────────────────────────────────────────────┘
 ```
 
-## Additional information
+## Contributing
 
-- File issues at the [issue tracker](https://github.com/yourusername/dual_capture/issues)
-- Contributions welcome via pull request
+PRs and issues welcome at the [issue tracker](https://github.com/merajhossain028/dual_capture/issues).

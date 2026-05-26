@@ -7,10 +7,7 @@ import 'overlay_position.dart';
 /// [DualCaptureController] to control overlay placement, sizing, and
 /// compositing quality.
 class DualCaptureOptions {
-  /// Creates a [DualCaptureOptions].
-  ///
-  /// All parameters have sensible defaults — construct with no arguments to
-  /// get behaviour equivalent to [DualCaptureOptions.defaults].
+  /// Creates a [DualCaptureOptions]. All parameters are optional.
   const DualCaptureOptions({
     this.overlayPosition = OverlayPosition.bottomRight,
     this.overlayScale = 0.30,

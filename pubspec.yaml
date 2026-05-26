@@ -1,13 +1,11 @@
 name: dual_capture
 description: >-
-  A Flutter package for dual camera capture. Sequentially captures
-  the back then front camera, composites them into a single JPEG with a
-  configurable picture-in-picture overlay, and returns a DualCaptureResult
-  containing the composited file plus both raw files.
+  Capture back and front camera in sequence and composite them into a single
+  JPEG with a configurable picture-in-picture overlay.
 version: 0.1.0
-homepage: https://github.com/yourusername/dual_capture
-repository: https://github.com/yourusername/dual_capture
-issue_tracker: https://github.com/yourusername/dual_capture/issues
+homepage: https://github.com/merajhossain028/dual_capture
+repository: https://github.com/merajhossain028/dual_capture
+issue_tracker: https://github.com/merajhossain028/dual_capture/issues
 
 environment:
   sdk: '>=3.2.0 <4.0.0'

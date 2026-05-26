@@ -45,10 +45,10 @@ enum DualCaptureState {
   error,
 }
 
-/// Drives a dual-camera capture session.
+/// Manages the back → front capture pipeline.
 ///
-/// Extend [ChangeNotifier] so that UI widgets can rebuild on state changes via
-/// [ListenableBuilder] or [AnimatedBuilder].
+/// Extends [ChangeNotifier] — use [ListenableBuilder] to rebuild UI on state
+/// changes.
 class DualCaptureController extends ChangeNotifier {
   /// Creates a controller with the given [options].
   DualCaptureController({DualCaptureOptions? options})

@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter/widgets.dart';
 
 import 'dual_capture_exception.dart';
 import 'dual_capture_options.dart';
@@ -145,12 +144,13 @@ class DualCaptureController extends ChangeNotifier {
       final backFile = await _backController!.takePicture();
       _setState(DualCaptureState.captureDoneBack);
 
-      // 4. Dispose back controller — critical for iOS to release the camera.
-      await _backController!.dispose();
+      // 4. Null + notify first, then wait one frame so CameraPreview is removed
+      //    from the tree before dispose() triggers its internal listeners.
+      final backCtrl = _backController!;
       _backController = null;
-
-      // 5. Initialise front camera.
       _setState(DualCaptureState.initializingFront);
+      await WidgetsBinding.instance.endOfFrame;
+      await backCtrl.dispose();
       final cameras = await availableCameras();
       final frontDesc = cameras.firstWhere(
         (c) => c.lensDirection == CameraLensDirection.front,
@@ -173,12 +173,11 @@ class DualCaptureController extends ChangeNotifier {
       _setState(DualCaptureState.capturingFront);
       final frontFile = await _frontController!.takePicture();
 
-      // 9. Dispose front controller.
-      await _frontController!.dispose();
+      // 9. Null out before disposing so preview stops rendering it first.
+      final frontCtrl = _frontController!;
       _frontController = null;
-
-      // 10. Composite.
       _setState(DualCaptureState.compositing);
+      await frontCtrl.dispose();
       final backBytes = await File(backFile.path).readAsBytes();
       final frontBytes = await File(frontFile.path).readAsBytes();
 
@@ -188,7 +187,7 @@ class DualCaptureController extends ChangeNotifier {
         options: _options,
       );
 
-      final tempDir = await getTemporaryDirectory();
+      final tempDir = Directory.systemTemp;
       final timestamp = capturedAt.millisecondsSinceEpoch;
       final compositedFile =
           File('${tempDir.path}/dual_capture_composited_$timestamp.jpg');

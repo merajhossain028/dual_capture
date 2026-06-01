@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Widen camera constraint to support 0.11.x and 0.12.x.
+
 ## 0.1.0
 
 * Initial release.
